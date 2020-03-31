@@ -7,32 +7,38 @@ var app = new Vue({
                 name: 'iPhone 7',
                 price: 6188,
                 count: 1,
-                checked: true,
-                lastChecked: false
+                checked: false
             },
             {
                 id: 2,
                 name: 'iPad Pro',
                 price: 5888,
                 count: 1,
-                checked: true,
-                lastChecked: false
+                checked: false
             },
             {
                 id: 3,
                 name: 'MacBook Pro',
                 price: 21488,
                 count: 1,
-                checked: true,
-                lastChecked: false
+                checked: false
             }
         ]
     },
     computed: {
         totalPrice: function () {
             var total = 0;
-            for (let i = 0; i < this.list.length; i++) {
-                const item = this.list[i];
+            this.newlist = this.list.filter(function(item){
+                if(item.checked){
+                    return item;
+                }
+            });
+            for (let i = 0; i < this.newlist.length; i++) {
+                /* if (!this.list[i].checked) {
+                    continue;
+                } */
+
+                const item = this.newlist[i];
                 total += item.price * item.count;
             }
             return total.toString().replace(/\B(?=(\d{3})+$)/g, ',');
@@ -51,7 +57,6 @@ var app = new Vue({
         },
         check: function (index) {
             this.list[index].checked = this.list[index].checked ? false : true;
-            this.list[index].lastChecked = this.list[index].lastChecked ? false : true;
         }
     }
 })
