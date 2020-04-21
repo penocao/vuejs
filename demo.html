@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <child-component :cid="id" v-show="id==5"></child-component>
+      <button @click="id++">+</button>
+    </div>
+    <script>
+      Vue.component("child-component", {
+        template: "<div>+++++</div>",
+        props: ['cid'],
+        watch: {
+          cid() {
+            console.log("aaa");
+          }
+        }
+      });
+      new Vue({
+        el: "#app",
+        data: {
+          id: 3
+        }
+      });
+    </script>
+  </body>
+</html>
